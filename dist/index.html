@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🎉 Dual Holiday Countdown — Thanksgiving & Christmas</title>
+<meta name="description" content="Rust + Yew WASM app: live countdown to Thanksgiving and Christmas, auto-updating every year." />
+<style>
+:root { --bg:#0b1220; --card:#111a2e; --ink:#eef3ff; --muted:#a9b3c7; --accent:#5eead4; --accent2:#ffd166; }
+html,body{height:100%}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1a2440,transparent),radial-gradient(1000px 500px at 10% 0,#0f1831,transparent),var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:32px}
+header{display:flex;gap:12px;align-items:center;}
+header .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+h1{font-weight:800;letter-spacing:.3px;margin:0;font-size:clamp(22px,3.3vw,36px)}
+p.subtitle{color:var(--muted);margin:.25rem 0 1rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.label{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-weight:600;letter-spacing:.4px;text-transform:uppercase;font-size:12px}
+.label .pill{width:9px;height:9px;border-radius:50%}
+.t{font-size:46px;line-height:1.1;margin:.35rem 0}
+.units{color:var(--muted);font-size:13px}
+.quip{margin-top:.7rem;color:#c6d3ff}
+footer{margin-top:26px;color:var(--muted);font-size:13px}
+.accent{color:var(--accent)}
+.accent2{color:var(--accent2)}
+.small{font-size:12px}
+</style>
+<link rel="modulepreload" href="/holiday_dual_countdown-bd70990ddbe55e2f.js" crossorigin="anonymous" integrity="sha384-b/ZqhzFOiOlKa85Mz/O9axLBx/0Ce2QKEgnVMGn6P8FgNlHzS6WiU/UyEJHPBN/D"><link rel="preload" href="/holiday_dual_countdown-bd70990ddbe55e2f_bg.wasm" crossorigin="anonymous" integrity="sha384-gaTagyUuhGWoCV+tzLXtAoqP8wMXsjtOte40IX4H/tr3HiopvbH1m8RCfbPBMpqs" as="fetch" type="application/wasm"></head>
+<body>
+<div id="app" class="wrap"></div>
+<script type="module">import init from "./holiday_dual_countdown.js"; init();</script>
+
+<script type="module">
+import init, * as bindings from '/holiday_dual_countdown-bd70990ddbe55e2f.js';
+const wasm = await init({ module_or_path: '/holiday_dual_countdown-bd70990ddbe55e2f_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+</html>
